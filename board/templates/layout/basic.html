@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'board/styles.css' %}">
+    <title>{% block title%}{% endblock %}</title>
+</head>
+<body>
+<header>
+    <h1>Объявления</h1>
+</header>
+<button ><a  href="{% url 'add' %}">Добавить объявление</a></button><hr>
+<nav>
+    <a href="{% url 'index' %}">Главная</a>
+    {% for c in categories %}
+    <a href="{% url 'by_category' c.pk %}">{{ c.name }}</a>
+    {% endfor %}
+</nav>
+<section>
+{% block content %}
+{% endblock %}
+</section>
+
+</body>
+</html>
