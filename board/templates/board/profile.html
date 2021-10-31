@@ -1,0 +1,13 @@
+{% extends "layout/basic_2.html" %}
+{% load bootstrap4 %}
+{% block title %}Мой профиль{% endblock %}
+{% block content %}
+<h2>Профиль пользователя {{ user.username }}</h2>
+{% if user.first_name and user.last_name %}
+<p>3дравствуйте, {{ user.first_name }} {{ user.last_name }}!</p>
+{% else %}
+<p>3дравствуите!</p>
+{% endif %}
+<hr>
+<hЗ>Ваши объявления</hЗ>
+{% endblock %}

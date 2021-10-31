@@ -1,0 +1,15 @@
+{% extends 'layout/basic_2.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+
+    {% for b in bbs %}
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+        <h3>{{b.title}}</h3>
+        <h4>{{b.content}}</h4>
+        <h4>{{b.price}}</h4>
+        <p>опубликовано:  {{ b.published|date:"d.m.Y H:i" }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}
+</body>
+</html>
