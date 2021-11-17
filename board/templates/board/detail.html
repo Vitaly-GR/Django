@@ -1,0 +1,43 @@
+{% extends "layout/basic_2.html" %}
+{% block title %}{{ bb.title }} - {{ bb.category.name }}{% endblock %}
+{% block content %}
+
+<div class="container-fluid mt-3">
+    <div class="col">
+        <h2>{{ bb.title }}</h2>
+        <p>{{ bb.content }}</p>
+        <p class="font-weight-bold">{{ bb.price }} руб.</p>
+    </div>
+    {% if bb.image %}
+    <div class="container-fluid mt-1">
+      <div class="btn"  data-toggle="modal" data-target=".bd-example-modal-lg">
+          <img src="{{ bb.image.url }}" class="additional-image rounded">
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <img src="{{ bb.image.url }}" class="main-image">
+                </div>
+              </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if ais %}
+    {% for ai in ais %}
+        <div class="btn"  data-toggle="modal" data-target=".bd-example-modal-lg">
+          <img src="{{ ai.image.url }}" class="additional-image rounded">
+        </div>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-content">
+              <img src="{{ ai.image.url }}" class="main-image">
+            </div>
+        </div>
+
+    {% endfor %}
+    {% endif %}
+        <p class="text-right ">Опубликовано: {{ bb.published }}</p>
+        <p class="text-right ">Автор: {{ bb.contacts }}</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,15 +1,44 @@
 {% extends 'layout/basic_2.html' %}
+{% load thumbnail %}
+{% load bootstrap4 %}
 {% block title %}Главная{% endblock %}
 {% block content %}
-
+<div class="row justify-content-end">
+<form class="col-md-auto form-inline">
+{% bootstrap_form form show_label=False %}
+{% bootstrap_button button_class='btn-outline-dark' content='Поиск' button_type='submit' %}
+</form>
+</div>
+<br>
     {% for b in bbs %}
-    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="shadow-lg p-3 mb-5 bg-secondary rounded">
+        <a class="text-white" href="{% url 'board:detail' b.category.slug b.slug %}">
         <h3>{{b.title}}</h3>
-        <h4>{{b.content}}</h4>
-        <h4>{{b.price}}</h4>
-        <p>опубликовано:  {{ b.published|date:"d.m.Y H:i" }}</p>
+        <p>Описание: {{b.content}}</p>
+        <p>стоимость: {{b.price}} rub.</p>
+        </a>
+        {% if b.image %}
+        <div class="d-flex flex-row-reverse">
+        <img  class="rounded" src="{% thumbnail b.image 'default' %}">
+        </div>
+        {% endif %}
+        <p class="text-white">опубликовано:  {{ b.published|date:"d.m.Y H:i" }}</p>
     </div>
+
     {% endfor %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+      {% if page.has_previous %}
+        <li class="page-item"><a class="page-link bg-dark text-light" href="?page={{ page.previous_page_number }}">Previous</a></li>
+        <li class="page-item"><a class="page-link bg-dark text-light" href="?page={{ page.previous_page_number }}">{{ page.previous_page_number }}</a></li>
+        {% endif %}
+        <li class="page-item active"><a class="page-link bg-secondary text-light" href="#">{{ page.number }}</a></li>
+    {% if page.has_next %}
+     <li class="page-item "><a class="page-link bg-dark text-light" href="?page={{ page.next_page_number }}">{{ page.next_page_number }}</a></li>
+    <li class="page-item"><a class="page-link bg-dark text-light" href="?page={{ page.next_page_number }}">Next</a></li>
+    {% endif %}
+  </ul>
+</nav>
 {% endblock %}
 </body>
 </html>

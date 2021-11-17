@@ -1,0 +1,16 @@
+{% extends "layout/basic_2.html" %}
+{% load bootstrap4 %}
+
+{% block title %}Удаление объявления{% endblock %}
+{% block content %}
+<div class="col">
+    <h2>{{ bb.title }}</h2>
+    <p>{{ bb.content }}</p>
+    <p class="font-weight-bold">{{ bb.price }} руб.</p>
+</div>
+<h2>Удаление объявления</h2>
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+</form>
+<button type="submit" class="btn-danger rounded">Удалить</button>
+{% endblock %}

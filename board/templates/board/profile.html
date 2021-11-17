@@ -1,13 +1,32 @@
 {% extends "layout/basic_2.html" %}
+{% load thumbnail %}
 {% load bootstrap4 %}
 {% block title %}Мой профиль{% endblock %}
 {% block content %}
 <h2>Профиль пользователя {{ user.username }}</h2>
 {% if user.first_name and user.last_name %}
 <p>3дравствуйте, {{ user.first_name }} {{ user.last_name }}!</p>
+<hЗ class="font-weight-bold">Ваши объявления</hЗ>
+{% for b in bbs%}
+<div class="btn-lg btn-outline-secondary text-left rounded">
+<p>{{ b.title }}</p>
+<p>{{ b.content }}</p>
+<p>{{ b.price }}</p>
+{% if b.image %}
+    <div class="d-flex flex-row-reverse">
+    <img  class="rounded" src="{% thumbnail b.image 'default' %}">
+    </div>
+{% endif %}
+<p class="text-right mt-2">
+<a class="btn-warning btn-sm rounded" href="{% url 'board:bb_change' slug=b.slug %}">Исправить</a>
+<a class="btn-danger btn-sm rounded" href="{% url 'board:bb_delete' slug=b.slug %}">Удалить</a>
+</p>
+</div>
+<hr>
+{% endfor %}
 {% else %}
 <p>3дравствуите!</p>
 {% endif %}
 <hr>
-<hЗ>Ваши объявления</hЗ>
+
 {% endblock %}
