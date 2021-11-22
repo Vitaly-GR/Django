@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from .utilites import get_timestamp_path
 from transliterate import translit
 
+
 class Bb(models.Model):
     title = models.CharField(max_length=50, verbose_name='Товар')
     content = models.TextField(null=True, blank=True, verbose_name='Описание')
@@ -26,6 +27,8 @@ class Bb(models.Model):
         c_alph = 'abcdefghijklmnopqrstuvwxyz'
         if self.title[0].lower() in c_alph:
             a = translit(self.title, 'ru')
+        else:
+            a = self.title
         b = random.randint(1, 1000)
         self.slug = translit(a, reversed=True) + f'{b}'
         super().save(*args, **kwargs)
@@ -98,7 +101,7 @@ class SubRubric(Category):
 
 
 class AdditionalImage(models.Model):
-    bb = models.ForeignKey(Bb, on_delete=models. CASCADE, verbose_name='Объявление')
+    bb = models.ForeignKey(Bb, on_delete=models.CASCADE, verbose_name='Объявление')
     image = models.ImageField(upload_to=get_timestamp_path, verbose_name='Изображение')
 
     class Meta:

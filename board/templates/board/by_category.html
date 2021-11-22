@@ -13,7 +13,7 @@
     </form>
 </div>
 {% for bb in bbs %}
-    <div class="shadow-lg p-3 mb-5 bg-secondary text-light rounded">
+    <div class="shadow-lg w-90 p-3 mb-5 bg-secondary text-light rounded">
         <a class="text-white" href="{% url 'board:detail' bb.category.slug bb.slug %}">
         <h4>{{ bb.title }}</h4>
         <p>{{ bb.content }}</p>

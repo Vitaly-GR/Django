@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, other_page, by_category, bb_change, bb_delete
+from .views import index, other_page, by_category, bb_change, bb_delete, author_detail
 from .views import bb_create, BbLoginView, profile, BbLogoutView, ChangeUserInfoView, BbPasswordChange
 from .views import RegisterUserView, RegisterDoneView, user_activate, DeleteUserView, detail
 
@@ -8,10 +8,11 @@ app_name = 'board'
 urlpatterns = [
     path('', index, name='index'),
     path(' <str:page>/', other_page, name='other'),
-    path('acoounts/profile/change/<str:slug>/', bb_change, name='bb_change'),
+    path('accounts/profile/change/<str:slug>/', bb_change, name='bb_change'),
     path('accounts/profile/delete/<str:slug>/', bb_delete, name='bb_delete'),
     path('add/', bb_create, name='add'),
     path('accounts/profile/', profile, name='profile'),
+    path('accounts/<int:author_id>', author_detail, name='a_detail'),
     path('accounts/login/', BbLoginView.as_view(), name='login'),
 
     path('accounts/register/activate/<str:sign>/', user_activate, name='register_activate'),

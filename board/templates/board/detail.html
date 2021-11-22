@@ -37,7 +37,8 @@
     {% endfor %}
     {% endif %}
         <p class="text-right ">Опубликовано: {{ bb.published }}</p>
-        <p class="text-right ">Автор: {{ bb.contacts }}</p>
+        <a class="text-right" href="{% url 'board:a_detail' bb.author.pk %}" >Автор: {{ bb.author }}</a>
+        <p class="text-right ">Контакты: {{ bb.contacts }}</p>
     </div>
 </div>
 {% endblock %}

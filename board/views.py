@@ -22,6 +22,10 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 
+def author_detail(request, author_id):
+    author = AdvUser.objects.get(pk=author_id)
+    bb = Bb.objects.filter(author=author_id)
+    return render(request, 'board/author_detail.html', {'author': author, 'bb': bb})
 
 def user_activate(request, sign):
     try:

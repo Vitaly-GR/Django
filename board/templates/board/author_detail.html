@@ -1,0 +1,14 @@
+{% extends "layout/basic_2.html" %}
+{% block title %}{{ author.name }}{% endblock %}
+{% block content %}
+<p>Пользователь: {{ author.username }}</p>
+<p>Адрес электронной почты: {{ author.email }}</p>
+<h4 class="text-center">Все объявления пользователя</h4>
+{% for b in bb %}
+<div class="container-fluid w-50 rounded bg-secondary">
+<a href="{% url 'board:detail' b.category.slug b.slug %}">
+    <p class="text-center">{{b.title}}</p>
+    <p class="text-center">{{b.price}}</p>
+</a></div>
+{% endfor %}
+{% endblock %}

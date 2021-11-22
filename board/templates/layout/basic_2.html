@@ -10,63 +10,63 @@
         <link rel="stylesheet" type="text/css" href="{% static 'board/style.css' %}">
         {% bootstrap_javascript jquery='slim' %}
     </head>
-    <body class="container-fluid">
-        <header class="mb-4">
-        <h1 class="display-2 font-weight-bold font-italic  text-dark text-center">Барахолка</h1>
-        </header>
-    <div class="row">
-        <ul class="col nav justify-content-end border">
-            {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link text-dark" href="{% url 'board:add' %}">Добавить объявление</a></li>
-            <li class="nav-item dropdown dropleft text-dark">
-                <a class="nav-link dropdown text-dark"
-                data-toggle="dropdown"
-                href="#" role="button" aria-haspopup="true"
-                aria-expanded="False">Профиль</a>
-                    <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'board:profile' %}">Мои объявления</a>
-                    <a class="dropdown-item" href="{% url 'board:profile_change' %}">Изменить личные данные</a>
-                    <a class="dropdown-item" href="{% url 'board:password_change' %}">Изменить пароль</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'board:logout' %}">Выйти</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'board:profile_delete'%}">Удалить</a>
-                    </div>
-            </li>
-            {% else %}
-            <li class="nav-item"><a class="nav-link text-dark" href="{% url 'board:register'%}">Регистрация</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="{% url 'board:login' %}">Bxoд</a></li>
-            {% endif %}
-        </ul>
-    </div>
-    <div class="row">
-    <nav class="col-md-auto nav flex-column border">
-        <a class="nav-link root text-dark" href="{% url 'board:index' %}">Главная</a>
-        <a class="nav-link root text-dark" href="{% url 'board:other' page='about' %}">О сайте</a>
-        <div class="d-flex flex-column bg-white rounded">
-            <a class="btn btn-link" data-toggle="collapse" href="#collapseExample"
-               aria-expanded="false" aria-controls="collapseExample"><h5 class="text-dark">Категории</h5></a>
-        </div>
-        <div class="collapse" id="collapseExample">
-          {% for c in rubrics %}
-            {% ifchanged c.super_category.slug %}
-            <div class="d-flex flex-column rounded">
-            <a href="{% url 'board:by_category' c.super_category.slug %}"><h5 class="text-dark">{{ c.super_category.name }}</h5></a>
-            {% endifchanged %}
-                <div class="d-flex flex-column bg-white rounded">
-                <a class="text-dark" href="{% url 'board:by_category' c.slug %}"><h6>{{ c.name }}</h6></a>
-          {% endfor %}
+<body class="container-fluid">
+    <header class="mb-4">
+    <h1 class="display-2 font-weight-bold font-italic  text-dark text-center">Барахолка</h1>
+    </header>
+<div class="row">
+    <ul class="col nav justify-content-end border">
+        {% if user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link text-dark" href="{% url 'board:add' %}">Добавить объявление</a></li>
+        <li class="nav-item dropdown dropleft text-dark">
+            <a class="nav-link dropdown text-dark"
+            data-toggle="dropdown"
+            href="#" role="button" aria-haspopup="true"
+            aria-expanded="False">Профиль</a>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'board:profile' %}">Мои объявления</a>
+                <a class="dropdown-item" href="{% url 'board:profile_change' %}">Изменить личные данные</a>
+                <a class="dropdown-item" href="{% url 'board:password_change' %}">Изменить пароль</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'board:logout' %}">Выйти</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'board:profile_delete'%}">Удалить</a>
                 </div>
+        </li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link text-dark" href="{% url 'board:register'%}">Регистрация</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="{% url 'board:login' %}">Bxoд</a></li>
+        {% endif %}
+    </ul>
+</div>
+<div class="row">
+<nav class="col-md-auto nav flex-column border">
+    <a class="nav-link root text-dark" href="{% url 'board:index' %}">Главная</a>
+    <a class="nav-link root text-dark" href="{% url 'board:other' page='about' %}">О сайте</a>
+    <div class="d-flex flex-column bg-white rounded">
+        <a class="btn btn-link" data-toggle="collapse" href="#collapseExample"
+           aria-expanded="false" aria-controls="collapseExample"><h5 class="text-dark">Категории</h5></a>
+    </div>
+    <div class="collapse" id="collapseExample">
+      {% for c in rubrics %}
+        {% ifchanged c.super_category.slug %}
+        <div class="d-flex flex-column rounded">
+        <a href="{% url 'board:by_category' c.super_category.slug %}"><h5 class="text-dark">{{ c.super_category.name }}</h5></a>
+        {% endifchanged %}
+            <div class="d-flex flex-column bg-white rounded">
+            <a class="text-dark" href="{% url 'board:by_category' c.slug %}"><h6>{{ c.name }}</h6></a>
+      {% endfor %}
             </div>
         </div>
-    </nav>
-<section class="col border py-2">
-        {% bootstrap_messages %}
-        {% block content %}
-        {% endblock %}
-</section>
     </div>
-<footer class="mt-3">
+</nav>
+<section class="col border py-2">
+    {% bootstrap_messages %}
+    {% block content %}
+    {% endblock %}
+</section>
+</div>
+<footer class="mt-1">
 <p class="text-center font-italic">&copy; Сколково</p>
 
 </footer>
