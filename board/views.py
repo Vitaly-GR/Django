@@ -1,6 +1,4 @@
-
 from django.shortcuts import render, get_object_or_404, redirect
-
 
 from .models import Bb, Category, AdvUser, SubRubric, SuperCategory
 from .forms import BbForm, ChangeUserInfo, RegisterUserForm, SearchForm, AiFormSet
@@ -173,23 +171,6 @@ def bb_delete(request, slug):
     else:
         context = {'bb': bb}
         return render(request, 'board/bb_delete.html', context)
-
-    # class BbCreateView(CreateView):
-    #     template_name = 'board/create.html'
-    #     form_class = BbForm
-    #     success_url = reverse_lazy('board:index')
-    #
-    #     def post(self, request, **kwargs):
-    #         author = request.user.pk
-    #         form = BbForm(request.POST, instance=Bb.objects.filter(author))
-    #         if form.is_valid():
-    #             form.save()
-    #         return super().post(request, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = Category.objects.all()
-        return context
 
 
 class BbLoginView(LoginView):
