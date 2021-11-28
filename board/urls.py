@@ -14,11 +14,9 @@ urlpatterns = [
     path('accounts/profile/', profile, name='profile'),
     path('accounts/<int:author_id>', author_detail, name='a_detail'),
     path('accounts/login/', BbLoginView.as_view(), name='login'),
-
     path('accounts/register/activate/<str:sign>/', user_activate, name='register_activate'),
     path('accounts/register/done/', RegisterDoneView.as_view(), name='register_done'),
     path('accounts/register/', RegisterUserView.as_view(), name='register'),
-
     path('accounts/profile/', profile, name='profile'),
     path('accounts/logout/', BbLogoutView.as_view(), name='logout'),
     path('<str:category_slug>/<str:slug>/', detail, name='detail'),

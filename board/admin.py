@@ -9,7 +9,7 @@ class AdditionalImageInline(admin.TabularInline):
 
 
 class BbAdmin(admin.ModelAdmin):
-    list_display = ('title', 'content', 'price', 'published', 'category', 'author', 'slug')
+    list_display = ('title', 'content', 'price', 'published', 'category', 'author', 'slug', 'views')
     list_display_links = ('title', 'content')
     search_fields = ('title', 'content')
     fields = (('category', 'author'), 'title', 'content', 'price', 'contacts', 'image', 'is_active', 'slug')
