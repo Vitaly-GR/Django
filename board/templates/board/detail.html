@@ -2,43 +2,48 @@
 {% block title %}{{ bb.title }} - {{ bb.category.name }}{% endblock %}
 {% block content %}
 
-<div class="container-fluid mt-3">
+<div class="container mt-3 bg-secondary rounded">
     <div class="col">
-        <h2>{{ bb.title }}</h2>
-        <p>{{ bb.content }}</p>
-        <p class="font-weight-bold">{{ bb.price }} руб.</p>
+        <h2 class="text-white">{{ bb.title }}</h2>
+        <p class="text-white">{{ bb.content }}</p>
+        <p class="text-white">{{ bb.price }} руб.</p>
     </div>
     {% if bb.image %}
     <div class="container-fluid mt-1">
       <div class="btn"  data-toggle="modal" data-target=".bd-example-modal-lg">
           <img src="{{ bb.image.url }}" class="additional-image rounded">
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <img src="{{ bb.image.url }}" class="main-image">
-                </div>
-              </div>
+      </div>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <img src="{{ bb.image.url }}" class="main-image">
             </div>
+          </div>
         </div>
+
     {% endif %}
     {% if ais %}
     {% for ai in ais %}
-        <div class="btn"  data-toggle="modal" data-target=".bd-example-modal-lg">
+        <div class="btn"  data-toggle="modal" data-target="#modal-{{ ai.pk }}">
           <img src="{{ ai.image.url }}" class="additional-image rounded">
         </div>
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+        <div class="modal fade bd-example-modal-lg" id="modal-{{ ai.pk }}" tabindex="-1" role="dialog"
              aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-content">
-              <img src="{{ ai.image.url }}" class="main-image">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <img src="{{ ai.image.url }}" class="main-image">
+                </div>
             </div>
-        </div>
-
+        </div><br>
     {% endfor %}
     {% endif %}
-        <p class="text-right ">Опубликовано: {{ bb.published }}</p>
-        <a class="text-right" href="{% url 'board:a_detail' bb.author.pk %}" >Автор: {{ bb.author }}</a>
-        <p class="text-right ">Контакты: {{ bb.contacts }}</p>
+        <a class="text-white" href="{% url 'board:a_detail' bb.author.pk %}" >Автор: {{ bb.author }}</a><br>
+        <a class="text-white" href="mailto:{{ bb.author.email }}">Email:{{ bb.author.email }}</a>
+        {% if bb.author.phone_number %}
+        <p><a class="text-white" href="tel:{{ bb.author.phone_number }}">контактный телефон: {{ bb.author.phone_number }}</a></p>
+        {% endif %}
+        <p class="text-right text-white">Опубликовано: {{ bb.published }}</p>
     </div>
 </div>
 {% endblock %}

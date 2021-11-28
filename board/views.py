@@ -1,8 +1,6 @@
-
 from django.shortcuts import render, get_object_or_404, redirect
 
-
-from .models import Bb, Category, AdvUser, SubRubric, SuperCategory
+from .models import Bb, Category, AdvUser
 from .forms import BbForm, ChangeUserInfo, RegisterUserForm, SearchForm, AiFormSet
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
@@ -22,10 +20,13 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 
+
 def author_detail(request, author_id):
     author = AdvUser.objects.get(pk=author_id)
     bb = Bb.objects.filter(author=author_id)
+
     return render(request, 'board/author_detail.html', {'author': author, 'bb': bb})
+
 
 def user_activate(request, sign):
     try:
@@ -177,23 +178,6 @@ def bb_delete(request, slug):
     else:
         context = {'bb': bb}
         return render(request, 'board/bb_delete.html', context)
-
-    # class BbCreateView(CreateView):
-    #     template_name = 'board/create.html'
-    #     form_class = BbForm
-    #     success_url = reverse_lazy('board:index')
-    #
-    #     def post(self, request, **kwargs):
-    #         author = request.user.pk
-    #         form = BbForm(request.POST, instance=Bb.objects.filter(author))
-    #         if form.is_valid():
-    #             form.save()
-    #         return super().post(request, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['category'] = Category.objects.all()
-        return context
 
 
 class BbLoginView(LoginView):

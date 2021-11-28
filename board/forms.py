@@ -23,7 +23,7 @@ class ChangeUserInfo(ModelForm):
 
     class Meta:
         model = AdvUser
-        fields = ('username', 'email', 'first_name', 'last_name', 'send_messages')
+        fields = ('username', 'email', 'first_name', 'last_name', 'phone_number', 'send_messages')
 
 
 class RegisterUserForm(ModelForm):

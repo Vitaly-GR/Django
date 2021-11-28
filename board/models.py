@@ -54,6 +54,7 @@ class Category(models.Model):
 class AdvUser(AbstractUser):
     is_activated = models.BooleanField(default=True, db_index=True, verbose_name='Активирован?')
     send_messages = models.BooleanField(default=True, verbose_name='Включить уведомления?')
+    phone_number = models.CharField(max_length=15, blank=True, verbose_name='Телефон')
 
     def delete(self, *args, **kwargs):
         for bb in self.bb_set.all():
