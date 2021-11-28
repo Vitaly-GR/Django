@@ -117,9 +117,11 @@ def by_category(request, category_slug):
 
 
 def detail(request, category_slug, slug):
-    bb = get_object_or_404(Bb, slug=slug)
+    bb = Bb.objects.get(slug=slug)
     ais = bb.additionalimage_set.all()
     bbs = Bb.objects.all()
+    bb.views += 1
+    bb.save_base()
 
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']

@@ -3,7 +3,6 @@ from django.dispatch import Signal
 from .utilites import send_activation_notification
 
 
-
 class BoardConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'board'
@@ -17,6 +16,3 @@ def user_registered_dispatcher(sender, **kwargs):
 
 
 user_registered.connect(user_registered_dispatcher)
-
-
-

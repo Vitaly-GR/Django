@@ -4,9 +4,12 @@
 {% block content %}
 <h6>Пользователь: {{ author.username }}</h6>
 <p>Адрес электронной почты: {{ author.email }}</p>
+{% if author.phone_number %}
 <p>Контактный телефон: {{author.phone_number}}</p>
+{% endif %}
 <h4 class="text-center">Все объявления пользователя</h4>
 {% for b in bb %}
+    <a class="text-white" href="{% url 'board:detail' b.category.slug b.slug %}">
     <div class="shadow p-3 mb-5 rounded bg-secondary">
     <h5>{{b.title}}</h5>
     <p>Описание: {{b.content}}</p>
@@ -32,6 +35,6 @@
         <hr>
     {% endif %}
     </div>
-
+    </a>
 {% endfor %}
 {% endblock %}

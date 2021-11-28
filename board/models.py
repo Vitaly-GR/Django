@@ -17,6 +17,7 @@ class Bb(models.Model):
     contacts = models.TextField(verbose_name='Контакты', null=True)
     is_active = models.BooleanField(default=True, db_index=True, verbose_name='Выводить в списке?')
     slug = models.SlugField(db_index=True, null=True, unique=True)
+    views = models.IntegerField(default=0)
 
     def delete(self, *args, **kwargs):
         for ai in self.additionalimage_set.all():

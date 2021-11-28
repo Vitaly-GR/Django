@@ -3,10 +3,12 @@
 {% block content %}
 
 <div class="container mt-3 bg-secondary rounded">
+
     <div class="col">
         <h2 class="text-white">{{ bb.title }}</h2>
         <p class="text-white">{{ bb.content }}</p>
         <p class="text-white">{{ bb.price }} руб.</p>
+
     </div>
     {% if bb.image %}
     <div class="container-fluid mt-1">
@@ -41,9 +43,12 @@
         <a class="text-white" href="{% url 'board:a_detail' bb.author.pk %}" >Автор: {{ bb.author }}</a><br>
         <a class="text-white" href="mailto:{{ bb.author.email }}">Email:{{ bb.author.email }}</a>
         {% if bb.author.phone_number %}
-        <p><a class="text-white" href="tel:{{ bb.author.phone_number }}">контактный телефон: {{ bb.author.phone_number }}</a></p>
+            <p><a class="text-white" href="tel:{{ bb.author.phone_number }}">контактный телефон: {{ bb.author.phone_number }}</a></p>
         {% endif %}
-        <p class="text-right text-white">Опубликовано: {{ bb.published }}</p>
+        <div class="d-flex justify-content-between">
+        <p class="text-right text-white">Просмотрено: {{ bb.views }} раз</p>
+        <p class="text-right text-white"> Опубликовано: {{ bb.published }}</p>
+        </div>
     </div>
 </div>
 {% endblock %}

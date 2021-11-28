@@ -1,4 +1,4 @@
-from .models import SubRubric, Bb
+from .models import SubRubric
 
 
 def board_context_processor(request):
@@ -9,4 +9,3 @@ def board_context_processor(request):
             context['keyword'] = '?keyword=' + keyword
             context['all'] = context['keyword']
     return context
-

@@ -11,12 +11,13 @@
 </div>
 <br>
     {% for b in bbs %}
+    <a class="text-white" href="{% url 'board:detail' b.category.slug b.slug %}">
     <div class="shadow-lg p-3 mb-5 bg-secondary rounded">
-        <a class="text-white" href="{% url 'board:detail' b.category.slug b.slug %}">
+
         <h3>{{b.title}}</h3>
         <p>Описание: {{b.content}}</p>
         <p>стоимость: {{b.price}} rub.</p>
-        </a>
+
         {% if b.image %}
         <div class="d-flex flex-row-reverse">
         <img  class="rounded" src="{% thumbnail b.image 'default' %}">
@@ -24,7 +25,7 @@
         {% endif %}
         <p class="text-white">опубликовано:  {{ b.published|date:"d.m.Y H:i" }}</p>
     </div>
-
+    </a>
     {% endfor %}
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">

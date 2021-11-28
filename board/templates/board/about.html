@@ -1,7 +1,15 @@
 {% extends 'layout/basic_2.html' %}
+{% load static %}
 {% block title %}О сайте{% endblock %}
 {% block content %}
 <h4>Информация о сайте</h4>
 Cайт для размещения объявлений о продаже.
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+    <img src="{% static 'board/smile.jpeg' %}">
+    </div>
+    <h1 class="text-center font-weight-bold">Здесь должно быть много текста</h1>
+</div>
 
 {% endblock %}
